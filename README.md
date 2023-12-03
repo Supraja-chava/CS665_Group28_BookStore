@@ -5,7 +5,7 @@ Group members:
 
 1) Bhargavi Supraja Chava - N443Q864 (https://github.com/Supraja-chava)
 
-Certainly! Here's a detailed description of the book store management application:
+YouTube Link:
 
 ### Bookstore Management System Description:
 
