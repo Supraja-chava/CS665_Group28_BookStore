@@ -63,6 +63,75 @@ with app.app_context():
     conn.close()
 
 
+# Home page
+@app.route('/')
+def home():
+    return render_template('Home.html')
+
+# Display all publishers
+@app.route('/publishers')
+def display_publishers():
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM Publisher')
+    publishers = cursor.fetchall()
+    return render_template('publishers.html', publishers=publishers)
+
+# Add a new publisher
+@app.route('/publishers/add', methods=['GET', 'POST'])
+def add_publisher():
+    if request.method == 'POST':
+        conn = get_db()
+        cursor = conn.cursor()
+        publisher_name = request.form['publisher_name']
+        publication_address = request.form['publication_address']
+        publication_phone = request.form['publication_phone']
+        publication_email = request.form['publication_email']  # Corrected line
+        publication_web = request.form['publication_web']
+
+        # Generate a 6-digit unique publisher ID
+        publisher_id = str(uuid.uuid4().int)[:7]
+
+        cursor.execute('INSERT INTO Publisher (publisher_id, publisher_name, publication_address, publication_phone, publication_email, publication_web) VALUES (?, ?, ?, ?, ?, ?)',
+                       (publisher_id, publisher_name, publication_address, publication_phone, publication_email, publication_web))
+        conn.commit()
+        return redirect('/publishers')
+
+    return render_template('add_publisher.html')
+
+# Update a publisher
+@app.route('/publishers/update/<string:publisher_id>', methods=['GET', 'POST'])
+def update_publisher(publisher_id):
+    conn = get_db()
+    cursor = conn.cursor()
+
+    if request.method == 'POST':
+        publisher_name = request.form['publisher_name']
+        publication_address = request.form['publication_address']
+        publication_phone = request.form['publication_phone']
+        publication_email = request.form['publication_email']  # Added this line
+        publication_web = request.form['publication_web']
+
+        cursor.execute('UPDATE Publisher SET publisher_name=?, publication_address=?, publication_phone=?, publication_email=?, publication_web=? WHERE publisher_id=?',
+                       (publisher_name, publication_address, publication_phone, publication_email, publication_web, publisher_id))
+        conn.commit()
+        return redirect('/publishers')
+
+    cursor.execute('SELECT * FROM Publisher WHERE publisher_id=?', (publisher_id,))
+    publisher = cursor.fetchone()
+    return render_template('update_publisher.html', publisher=publisher, publisher_id=publisher_id)
+
+# Delete a publisher
+@app.route('/publishers/delete/<string:publisher_id>', methods=['POST'])
+def delete_publisher(publisher_id):
+    conn = get_db()
+    cursor = conn.cursor()
+
+    cursor.execute('DELETE FROM Publisher WHERE publisher_id=?', (publisher_id,))
+    conn.commit()
+    return redirect('/publishers')
+
+
 
 
     
