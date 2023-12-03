@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Publisher Details</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        background-color: #f4f4f4;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+      }
+
+      .details-container {
+        background-color: #ffffff;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        padding: 20px;
+        border-radius: 8px;
+        text-align: left;
+        max-width: 600px;
+        width: 100%;
+      }
+
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+      }
+
+      th,
+      td {
+        border: 1px solid #dddddd;
+        padding: 10px;
+        text-align: left;
+      }
+
+      th {
+        background-color: #f2f2f2;
+      }
+
+      h2 {
+        color: #333333;
+      }
+
+      button {
+        background-color: #4caf50;
+        color: white;
+        padding: 10px 20px;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      button:hover {
+        background-color: #45a049;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="details-container">
+      <h2 align="center">Publication Details</h2>
+      <table>
+        <tr>
+          <th>Attribute</th>
+          <th>Details</th>
+        </tr>
+        <tr>
+          <td>Publisher ID</td>
+          <td>{{ publisher[0] }}</td>
+        </tr>
+        <tr>
+          <td>Publisher Name</td>
+          <td>{{ publisher[1] }}</td>
+        </tr>
+        <tr>
+          <td>Publication Phone</td>
+          <td>{{ publisher[2] }}</td>
+        </tr>
+        <tr>
+          <td>Publication Email</td>
+          <td>{{ publisher[3] }}</td>
+        </tr>
+        <tr>
+          <td>Publication Web</td>
+          <td>{{ publisher[4] }}</td>
+        </tr>
+        <tr>
+          <td>Publication Address</td>
+          <td>{{ publisher[5] }}</td>
+        </tr>
+      </table>
+      <br />
+      <button onclick="window.location.href='/books'">Back to Books</button>
+    </div>
+  </body>
+</html>
