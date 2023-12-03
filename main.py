@@ -236,6 +236,87 @@ def open_publisher_details(publisher_id):
     return render_template('publisher_details.html', publisher=publisher)
 
 
+# Display all customers
+@app.route('/customers')
+def display_customers():
+    conn = get_db()
+    cursor = conn.cursor()
+    cursor.execute('SELECT * FROM Customers')
+    customers = cursor.fetchall()
+    return render_template('customers.html', customers=customers)
+
+# Add a new customer
+@app.route('/customers/add', methods=['GET', 'POST'])
+def add_customer():
+    if request.method == 'POST':
+        conn = get_db()
+        cursor = conn.cursor()
+        name = request.form['name']
+        email = request.form['email']
+        phone = request.form['phone']
+        adress = request.form['adress']
+
+        # Generate a 10-digit customer ID
+        customer_id = str(uuid.uuid4().int)[:10]
+
+        cursor.execute('INSERT INTO Customers (customer_id, customer_name, customer_email, customer_phone, customer_adress) VALUES (?, ?, ?, ?, ?)',
+                       (customer_id, name, email, phone, adress))
+        conn.commit()
+        return redirect('/customers')
+
+    return render_template('add_customer.html')
+
+# Update a customer
+@app.route('/customers/update/<int:customer_id>', methods=['GET', 'POST'])
+def update_customer(customer_id):
+    conn = get_db()
+    cursor = conn.cursor()
+
+    if request.method == 'POST':
+        name = request.form['name']
+        email = request.form['email']
+        phone = request.form['phone']
+        adress = request.form['adress']
+
+        cursor.execute('UPDATE Customers SET customer_name=?, customer_email=?, customer_phone=?, customer_adress=? WHERE customer_id=?',
+                       (name, email, phone, adress, customer_id))
+        conn.commit()
+        return redirect('/customers')
+
+    cursor.execute('SELECT * FROM Customers WHERE customer_id=?', (customer_id,))
+    customer = cursor.fetchone()
+    return render_template('update_customer.html', customer=customer, customer_id=customer_id)
+
+# Delete a customer
+@app.route('/customers/delete/<int:customer_id>', methods=['POST'])
+def delete_customer(customer_id):
+    conn = get_db()
+    cursor = conn.cursor()
+
+    cursor.execute('DELETE FROM Customers WHERE customer_id=?', (customer_id,))
+    conn.commit()
+    return redirect('/customers')
+
+# Search for customers by name or email
+@app.route('/customers/search', methods=['GET'])
+def search_customers():
+    conn = get_db()
+    cursor = conn.cursor()
+    search_query = request.args.get('query', '').strip()
+
+    if search_query:
+        # Perform the search query
+        cursor.execute('SELECT * FROM Customers WHERE customer_name LIKE ? OR customer_email LIKE ?',
+                       ('%' + search_query + '%', '%' + search_query + '%'))
+        customers = cursor.fetchall()
+    else:
+        # If no search query provided, return all customers
+        cursor.execute('SELECT * FROM Customers')
+        customers = cursor.fetchall()
+
+    return render_template('customers.html', customers=customers)
+
+
 
 
     

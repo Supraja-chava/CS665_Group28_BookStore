@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Bookstore Management System</title>
+    <link
+      rel="stylesheet"
+      type="text/css"
+      href="{{ url_for('static', filename='styles.css') }}"
+    />
+    <style>
+      body {
+        background-image: url("https://assets-global.website-files.com/63a1cbc81b0e903002cf9cec/63f3c23016d299852d04b5e6_63d04bc8dc1e3b56fc058103_20-Books-Nurses-Should-Read.webp");
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-position: center center;
+        display: flex;
+        flex-direction: column;
+        align-items: center; /* Center content horizontally */
+        margin: 20px;
+      }
+
+      .header {
+        padding: 20px;
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        margin-bottom: 20px;
+        max-width: 500px; /* Limit the width of the header */
+        text-align: center;
+      }
+      .footer {
+        background-color: rgba(255, 255, 255, 0.8);
+        border-radius: 10px;
+        padding: 10px;
+        text-align: center;
+        margin-top: 20px;
+        max-width: 500px;
+      }
+
+      /* Copyright text style */
+      .copyright {
+        font-size: 12px;
+        color: #333;
+        margin-top: 10px;
+      }
+
+      .menu {
+        display: flex;
+        justify-content: center; /* Center list items horizontally */
+        margin-top: 10px;
+      }
+
+      .menu li {
+        margin: 9px;
+        background-color: #4caf59; /* Green color */
+        padding: 11px;
+        border-radius: 10px;
+        list-style: none; /* Remove bullet points */
+      }
+
+      /* Style the links */
+      .menu li a {
+        text-decoration: none;
+        color: #333;
+      }
+
+      /* Style for the heading */
+      .store-heading {
+        font-size: 36px;
+        font-weight: bold;
+        color: #ff6600; /* Change the color to orange (#ff6600) */
+      }
+
+      /* Style the home button */
+      .menu li.home {
+        position: absolute;
+        top: 20px;
+        right: 20px;
+      }
+
+      /* Home button style */
+      .home-button {
+        background-color: #4caf50;
+        color: white;
+        padding: 8px 16px;
+        text-align: center;
+        text-decoration: none;
+        font-size: 16px;
+        margin-top: 10px;
+        margin-right: 10px;
+        cursor: pointer;
+        border: none;
+        border-radius: 4px;
+      }
+      .creator-info {
+        font-size: 20px;
+        color: #0000ff;
+        margin-top: 8px;
+        font-weight: bold;
+      }
+      .dotted-line {
+        border-top: 3px dotted #888;
+        margin: 10px 0;
+      }
+      .home-button:hover {
+        background-color: #45a049;
+      }
+      .creator-info-box {
+        background-color: rgba(255, 255, 255, 0.8);
+        border: 1px solid #333; /* Add a border */
+        border-radius: 10px;
+        padding: 10px;
+        max-width: 500px;
+        text-align: center;
+        margin: 20px auto; /* Center the box horizontally and add some margin */
+      }
+
+      .moving-text {
+        position: absolute;
+        top: 0;
+        right: 100%;
+        white-space: nowrap;
+        animation: move-right 40s linear infinite;
+        font-size: 24px;
+      }
+      @keyframes move-right {
+        0% {
+          left: 100%;
+        }
+        100% {
+          left: -100%;
+        }
+      }
+      .separator {
+        border-top: 2px solid #000;
+        margin: 1px 0;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="header">
+      <h1 class="store-heading">CS665 Group28 Book Store</h1>
+      <p class="moving-text">Welcome to our Bookstore!</p>
+      <div class="menu">
+        <ul>
+          <li><a href="/books" class="home-button">Books Dashboard</a></li>
+          <li>
+            <a href="/publishers" class="home-button">Publisher Dashboard</a>
+          </li>
+          <li>
+            <a href="/customers" class="home-button">Customers Dashboard</a>
+          </li>
+          <li><a href="/orders" class="home-button">Orders Dashboard</a></li>
+        </ul>
+      </div>
+      <div class="footer">
+        <div class="separator"></div>
+        <p>&copy;2023 CS665 Group28 Book Store. All rights reserved.</p>
+        <p>Address: 123 Main Street, Cityville, KS, USA 10000</p>
+        <p>Email: contact@group28.com | Phone: +1 234-567-8901</p>
+        <div class="creator-info-box">
+          <p class="creator-info">Created by: Group 28 of CS665 - Fall 2023</p>
+          <p class="creator-info">Bhargavi Supraja Chava - N443Q864</p>
+          <p class="creator-info">
+            School of Computing, Wichita State University
+          </p>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
