@@ -92,8 +92,8 @@ def add_publisher():
         # Generate a 6-digit unique publisher ID
         publisher_id = str(uuid.uuid4().int)[:7]
 
-        cursor.execute('INSERT INTO Publisher (publisher_id, publisher_name, publication_address, publication_phone, publication_email, publication_web) VALUES (?, ?, ?, ?, ?, ?)',
-                       (publisher_id, publisher_name, publication_address, publication_phone, publication_email, publication_web))
+        cursor.execute('INSERT INTO Publisher (publisher_id, publisher_name, publication_phone, publication_email, publication_web, publication_address) VALUES (?, ?, ?, ?, ?, ?)',
+                       (publisher_id, publisher_name, publication_phone, publication_email, publication_web,  publication_address))
         conn.commit()
         return redirect('/publishers')
 
